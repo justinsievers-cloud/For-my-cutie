@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💘</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: white;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.25);
+  padding: 28px;
+  border-radius: 22px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 1.05em;
+  line-height: 1.55;
+}
+
+img {
+  width: 150px;
+  margin: 12px auto;
+  display: block;
+  border-radius: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+button:active {
+  transform: scale(0.94);
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: white;
+  color: #ff4d6d;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 💥 heart explosion */
+.explosion {
+  position: fixed;
+  font-size: 24px;
+  animation: explode 1s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes explode {
+  from { transform: scale(0); opacity: 1; }
+  to { transform: translate(var(--x), var(--y)) scale(1); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+  <h1>Lana, will you be my Valentine on February 14th? 💕</h1>
+
+  <img id="gif" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+
+  <button class="yes" onclick="yesClicked(event)">
+    Yes 💖
+  </button>
+
+  <button class="no" id="noBtn" onclick="noClicked()">
+    No 😐
+  </button>
+
+  <p id="noText"></p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
+  <h1>💍 Valentine Contract 💍</h1>
+  <p>
+    By clicking YES, you officially agreed  
+    to be my Valentine 💘  
+    <br><br>
+    I’m already excited for Valentine’s Day with you ✨
+  </p>
+
+  <button class="yes" onclick="showPage('page3')">
+    Continue 💌
+  </button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="card hidden" id="page3">
+  <h1>💌 Letters for You, Lana 💌</h1>
+  <button class="yes" onclick="showPage('letter1')">📩 Letter 1</button>
+  <button class="yes" onclick="showPage('letter2')">📩 Letter 2</button>
+</div>
+
+<!-- LETTER 1 -->
+<div class="card hidden" id="letter1">
+  <h1>My Lana 💖</h1>
+  <p>
+    Your smile feels like comfort,  
+    your laugh feels like home,  
+    and being with you feels right.  
+    <br><br>
+    I’m already counting the days  
+    until Valentine’s Day with you ✨
+  </p>
+  <button class="yes" onclick="showPage('page3')">Back 💌</button>
+</div>
+
+<!-- LETTER 2 -->
+<div class="card hidden" id="letter2">
+  <h1>Our Valentine’s Plan 💘</h1>
+  <p>How should we spend Valentine’s Day?</p>
+  <button class="yes">🍝 Dinner together</button>
+  <button class="yes">🎬 Cozy movie night</button>
+</div>
+
+</div>
+
+<script>
+const noOptions = [
+  { text: "Wait… what? 😳", gif: "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" },
+  { text: "I think you misclicked 😌", gif: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" },
+  { text: "That doesn’t feel right 🤨", gif: "https://media.giphy.com/media/fnHxVS8gD2Z0SBFuYn/giphy.gif" },
+  { text: "No is not an option 😏", gif: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" },
+  { text: "Nice try 😌", gif: "https://media.giphy.com/media/3o6ZsZKn2nGkzZ0H7G/giphy.gif" },
+  { text: "Come on… 💕", gif: "https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif" },
+  { text: "That button is lying 😅", gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif" },
+  { text: "I don’t believe you 🤔", gif: "https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" },
+  { text: "Error 404: No not found ❌", gif: "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" },
+  { text: "Try again 😏", gif: "https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif" },
+  { text: "Be honest… 😌", gif: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
+  { text: "Still no? 😈", gif: "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" },
+  { text: "Suspicious… 🤨", gif: "https://media.giphy.com/media/3o7btMCltyDvSgF92E/giphy.gif" },
+  { text: "Not buying it 😏", gif: "https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" },
+  { text: "One more try 💖", gif: "https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif" },
+  { text: "Your finger slipped 😅", gif: "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif" },
+  { text: "That’s illegal 😤", gif: "https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
+  { text: "Nice attempt 😈", gif: "https://media.giphy.com/media/3o6ZtpWvwnhf34Oj0A/giphy.gif" },
+  { text: "We both know the answer 😌", gif: "https://media.giphy.com/media/26AHqztlb4CzG3WTK/giphy.gif" },
+  { text: "Try again… slowly 😏", gif: "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" }
+];
+
+let noCount = 0;
+
+function noClicked() {
+  const current = noOptions[noCount % noOptions.length];
+  document.getElementById("noText").innerText = current.text;
+  document.getElementById("gif").src = current.gif;
+
+  const btn = document.getElementById("noBtn");
+  btn.style.position = "fixed";
+
+  const jump = Math.min(60 + noCount * 25, window.innerWidth);
+
+  let x = (Math.random() * jump) * (Math.random() > 0.5 ? 1 : -1);
+  let y = (Math.random() * jump) * (Math.random() > 0.5 ? 1 : -1);
+
+  let newX = btn.offsetLeft + x;
+  let newY = btn.offsetTop + y;
+
+  newX = Math.max(10, Math.min(newX, window.innerWidth - btn.offsetWidth - 10));
+  newY = Math.max(10, Math.min(newY, window.innerHeight - btn.offsetHeight - 10));
+
+  btn.style.left = newX + "px";
+  btn.style.top = newY + "px";
+
+  noCount++;
+}
+
+function yesClicked(e) {
+  explodeHearts(e.clientX, e.clientY);
+  showPage('page2');
+}
+
+function explodeHearts(x, y) {
+  for (let i = 0; i < 24; i++) {
+    const heart = document.createElement("div");
+    heart.className = "explosion";
+    heart.innerText = "💖";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    heart.style.setProperty("--x", (Math.random()*240-120)+"px");
+    heart.style.setProperty("--y", (Math.random()*240-120)+"px");
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+  }
+}
+
+function showPage(id) {
+  document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
