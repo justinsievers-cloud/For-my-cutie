@@ -8,10 +8,9 @@
 <style>
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   min-height: 100vh;
   overflow: hidden;
-  color: white;
   background: linear-gradient(120deg, #ff6b81, #ff9a9e, #fbc2eb, #a18cd1);
   background-size: 400% 400%;
   animation: gradientMove 14s ease infinite;
@@ -29,38 +28,33 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  text-align: center;
 }
 
 .card {
-  background: rgba(255,255,255,0.25);
-  padding: 30px;
+  position: relative;
+  background: rgba(255,255,255,0.9);
+  padding: 32px 26px 34px;
   border-radius: 26px;
   width: 100%;
   max-width: 440px;
   box-shadow: 0 20px 45px rgba(0,0,0,0.25);
-  backdrop-filter: blur(8px);
+  color: #2b2b2b;
+  text-align: center;
 }
 
-/* ✨ soft slide animation */
+/* ✨ page animation */
 .slide {
   animation: slideIn 0.35s ease;
 }
-
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
-  font-size: 1.8em;
-  margin-bottom: 14px;
+  font-size: 1.85em;
+  margin-bottom: 16px;
+  font-weight: 600;
 }
 
 p {
@@ -70,8 +64,7 @@ p {
 
 img {
   width: 220px;
-  max-width: 90%;
-  margin: 18px auto;
+  margin: 16px auto 10px;
   border-radius: 18px;
   display: block;
 }
@@ -84,23 +77,31 @@ button {
   border-radius: 30px;
   font-size: 1.05em;
   cursor: pointer;
-  transition: transform 0.15s ease;
 }
 
-button:active {
-  transform: scale(0.96);
+.yes {
+  background: #ff4d6d;
+  color: white;
 }
 
-.yes { background: #ff4d6d; color: white; }
-.no { background: white; color: #ff4d6d; }
-.secondary { background: rgba(255,255,255,0.9); color: #333; }
+.no {
+  background: #f1f1f1;
+  color: #ff4d6d;
+}
+
+.secondary {
+  background: #eaeaea;
+  color: #333;
+}
 
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 </style>
 </head>
 
@@ -111,7 +112,15 @@ button:active {
 <!-- START -->
 <div class="card slide" id="start">
   <h1>Lana, will you be my Valentine on February 14th? 💕</h1>
+
+  <img id="startGif"
+       src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+       alt="cute gif">
+
   <button class="yes" onclick="showPage('letters')">Yes 💖</button>
+  <button class="no" id="startNo" onclick="startNoClicked()">No 😐</button>
+
+  <p id="startNoText"></p>
 </div>
 
 <!-- LETTERS -->
@@ -157,7 +166,7 @@ button:active {
     We can watch a movie of your choice…  
     or simply talk and enjoy the time together.
   </p>
-  <button class="yes">Yes 💖</button>
+  <button class="yes" onclick="showPage('success')">Yes 💖</button>
   <button class="no" onclick="showPage('ideaNo')">No 😐</button>
   <button class="secondary" onclick="showPage('idea2')">Another idea 💡</button>
   <button class="secondary" onclick="showPage('letter2')">Back</button>
@@ -166,20 +175,14 @@ button:active {
 <!-- IDEA NO -->
 <div class="card hidden" id="ideaNo">
   <img src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" alt="sad gif">
-  <p>
-    Okay 🤍  
-    <br>
-    please share your decision with the admin.
-  </p>
+  <p><strong>Okay 🤍</strong><br>Please share your decision with the admin.</p>
 
   <button class="yes" onclick="showPage('idea1')">
     Would you like to gently go back and look at it again? 🤍
   </button>
 
-  <button class="disabled">
-    Or we do nothing at all
-  </button>
-  <p style="font-size:0.9em; opacity:0.85;">
+  <button class="disabled">Or we do nothing at all</button>
+  <p style="font-size:0.9em;">
     Unfortunately, the resources for this option have been exhausted 😝😏
   </p>
 </div>
@@ -198,15 +201,51 @@ button:active {
   <button class="secondary" onclick="showPage('idea1')">Back</button>
 </div>
 
+<!-- SUCCESS PAGE -->
+<div class="card hidden" id="success">
+  <h1>🎉 Congratulations 🎉</h1>
+  <p>
+    You have successfully completed  
+    the selection process.  
+    <br><br>
+    Please share your decision  
+    with the <strong>Master Admin</strong> 😌
+  </p>
+</div>
+
 </div>
 
 <script>
+let startNoCount = 0;
+const startNoTexts = [
+  "Are you sure? 😌",
+  "That felt a little suspicious 🤨",
+  "I think that button is lying 😅",
+  "Hmm… interesting choice 😏",
+  "Let’s try that again 🤍"
+];
+
+function startNoClicked() {
+  const btn = document.getElementById("startNo");
+  const text = document.getElementById("startNoText");
+
+  text.innerText = startNoTexts[startNoCount % startNoTexts.length];
+  startNoCount++;
+
+  const card = document.getElementById("start");
+  const maxX = card.clientWidth - btn.offsetWidth - 20;
+  const maxY = 120;
+
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * maxX + "px";
+  btn.style.top = Math.random() * maxY + "px";
+}
+
 function showPage(id) {
   document.querySelectorAll('.card').forEach(c => {
     c.classList.add('hidden');
     c.classList.remove('slide');
   });
-
   const page = document.getElementById(id);
   page.classList.remove('hidden');
   page.classList.add('slide');
