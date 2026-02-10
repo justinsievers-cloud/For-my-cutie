@@ -30,7 +30,7 @@ body {
   padding: 20px;
 }
 
-/* 🌸 CARD BACKGROUND: PINK / ROSA / RED */
+/* 🌸 CARD BACKGROUND */
 .card {
   position: relative;
   background: linear-gradient(
@@ -46,7 +46,6 @@ body {
   box-shadow: 0 25px 55px rgba(0,0,0,0.25);
   color: #2b2b2b;
   text-align: center;
-  overflow: hidden;
 }
 
 .hidden { display: none; }
@@ -90,19 +89,6 @@ button {
 .no { background: #f1f1f1; color: #ff4d6d; }
 .secondary { background: #eaeaea; color: #333; }
 .disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* 🌹 REAL FLOWER STICKERS */
-.sticker {
-  position: absolute;
-  width: 90px;
-  opacity: 0.85;
-  pointer-events: none;
-  animation: floatSlow 18s linear infinite;
-}
-@keyframes floatSlow {
-  from { transform: translateY(120vh) rotate(0deg); }
-  to { transform: translateY(-140vh) rotate(360deg); }
-}
 </style>
 </head>
 
@@ -115,30 +101,12 @@ button {
   <h1>Lana, will you be my Valentine on February 14th? 💕</h1>
 
   <img id="startGif" class="main-gif"
-       src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+       src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
 
-  <button class="yes" onclick="showPage('flowers')">Yes 💖</button>
+  <button class="yes" onclick="showPage('letters')">Yes 💖</button>
   <button class="no" id="startNo" onclick="startNoClicked()">No 😐</button>
 
   <p id="startNoText"></p>
-</div>
-
-<!-- FLOWERS PAGE -->
-<div class="card hidden" id="flowers">
-
-  <!-- 🌹 Roses -->
-  <img class="sticker" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80" style="left:5%; animation-delay:0s;">
-  <img class="sticker" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=300&q=80" style="left:75%; animation-delay:3s;">
-
-  <!-- 🌸 Orchids -->
-  <img class="sticker" src="https://images.unsplash.com/photo-1535930749574-1399327ce78f?auto=format&fit=crop&w=300&q=80" style="left:25%; animation-delay:6s;">
-  <img class="sticker" src="https://images.unsplash.com/photo-1551892589-865f6986942d?auto=format&fit=crop&w=300&q=80" style="left:55%; animation-delay:9s;">
-
-  <!-- 🤍 Lilies -->
-  <img class="sticker" src="https://images.unsplash.com/photo-1495433324511-bf8e92934d90?auto=format&fit=crop&w=300&q=80" style="left:40%; animation-delay:12s;">
-
-  <h1>Flowers, just for you 🌹🌸🤍</h1>
-  <button class="yes" onclick="showPage('letters')">Continue 💖</button>
 </div>
 
 <!-- LETTERS -->
@@ -192,9 +160,11 @@ button {
 <div class="card hidden" id="ideaNo">
   <img class="main-gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
   <p><strong>Okay 🤍</strong><br>Please share your decision with the admin.</p>
+
   <button class="yes" onclick="showPage('idea1')">
     Would you like to gently look again? 🤍
   </button>
+
   <button class="disabled">Or we do nothing at all</button>
   <p>Unfortunately, resources are exhausted 😝😏</p>
 </div>
@@ -214,25 +184,25 @@ button {
 </div>
 
 <script>
-const fallbackGif = "https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif";
+const fallbackGif = "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif";
 
-/* 15 matching No reactions */
+/* 😔 ONLY SAD GIFS (15) */
 const startNoOptions = [
-  { text:"Wait… what? 😳", gif:"https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" },
-  { text:"That was unexpected 😅", gif:"https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif" },
-  { text:"Hmm… are you sure? 🤨", gif:"https://media.giphy.com/media/3orieZg0iN3GkZyF1S/giphy.gif" },
-  { text:"That feels suspicious 🤔", gif:"https://media.giphy.com/media/3o6ZsX2yKZK4mV6Yy4/giphy.gif" },
-  { text:"Nice try 😏", gif:"https://media.giphy.com/media/3o6ZtpWvwnhf34Oj0A/giphy.gif" },
-  { text:"Are you teasing me? 😌", gif:"https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif" },
-  { text:"That button is lying 😅", gif:"https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif" },
-  { text:"That kinda hurt 🥺", gif:"https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" },
-  { text:"Ouch… okay 😔", gif:"https://media.giphy.com/media/l0HlQ7LRalY8Yv5x6/giphy.gif" },
-  { text:"My heart says yes 💔", gif:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
-  { text:"Let’s try again 🤍", gif:"https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" },
-  { text:"Take your time 😌", gif:"https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" },
-  { text:"I don’t believe you 😅", gif:"https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" },
-  { text:"That choice feels illegal 😝", gif:"https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
-  { text:"One more time… 💕", gif:"https://media.giphy.com/media/3o6Zt8MgUuvSbkZYWc/giphy.gif" }
+  { text:"Oh… that hurts a little 🥺", gif:"https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" },
+  { text:"That makes me sad 😔", gif:"https://media.giphy.com/media/l0HlQ7LRalY8Yv5x6/giphy.gif" },
+  { text:"My heart dropped 💔", gif:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
+  { text:"Ouch… okay 😞", gif:"https://media.giphy.com/media/26ufcVAp3AiJJsrIs/giphy.gif" },
+  { text:"That wasn’t what I hoped for 🥺", gif:"https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" },
+  { text:"This makes me quiet 😔", gif:"https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
+  { text:"I need a moment 💔", gif:"https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif" },
+  { text:"That stings 😞", gif:"https://media.giphy.com/media/l3vR4CdLInXOhr3rO/giphy.gif" },
+  { text:"I didn’t expect that 🥺", gif:"https://media.giphy.com/media/3o7btNRptqBgLSKR2w/giphy.gif" },
+  { text:"My smile faded 😔", gif:"https://media.giphy.com/media/3o6ZsU1mYb0K6xHk3K/giphy.gif" },
+  { text:"That’s a soft no 💔", gif:"https://media.giphy.com/media/3o6Zt2G1n2rQwq6zKM/giphy.gif" },
+  { text:"I’ll pretend I’m okay 😞", gif:"https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" },
+  { text:"That hurt more than I thought 🥺", gif:"https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" },
+  { text:"I could use a hug 💔", gif:"https://media.giphy.com/media/3o6ZsY8ZJpYpH1nJ4k/giphy.gif" },
+  { text:"Okay… I hear you 😔", gif:"https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" }
 ];
 
 let startNoCount = 0;
