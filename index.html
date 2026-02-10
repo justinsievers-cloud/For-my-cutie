@@ -6,230 +6,149 @@
 <title>Be My Valentine 💘</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  min-height: 100vh;
-  overflow: hidden;
-  background: linear-gradient(120deg, #ff6b81, #ff9a9e, #fbc2eb, #a18cd1);
-  background-size: 400% 400%;
-  animation: bgMove 14s ease infinite;
+body{
+  margin:0;
+  font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  min-height:100vh;
+  background:linear-gradient(120deg,#ff6b81,#ff9a9e,#fbc2eb,#a18cd1);
+  background-size:400% 400%;
+  animation:bgMove 14s ease infinite;
 }
-
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+.container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
 }
-
-.card {
-  position: relative;
-  background: linear-gradient(
-    160deg,
-    rgba(255,235,238,0.96),
-    rgba(255,205,210,0.94),
-    rgba(255,224,230,0.95)
-  );
-  padding: 34px 26px;
-  border-radius: 28px;
-  width: 100%;
-  max-width: 440px;
-  box-shadow: 0 25px 55px rgba(0,0,0,0.25);
-  color: #2b2b2b;
-  text-align: center;
+.card{
+  background:rgba(255,235,238,0.96);
+  padding:32px 26px;
+  border-radius:28px;
+  max-width:440px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 25px 55px rgba(0,0,0,.25);
+  color:#2b2b2b;
 }
-
-.hidden { display: none; }
-
-.slide {
-  animation: slideIn 0.35s ease;
+.hidden{display:none}
+h1{font-size:1.8em;margin-bottom:12px}
+p{font-size:1.05em;line-height:1.6}
+img.main-gif{
+  width:240px;
+  margin:14px auto;
+  border-radius:18px;
+  display:block;
 }
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:30px;
+  font-size:1.05em;
+  cursor:pointer;
+  transition:transform .25s ease;
 }
-
-h1 {
-  font-size: 1.85em;
-  margin-bottom: 14px;
-}
-
-p {
-  font-size: 1.05em;
-  line-height: 1.6;
-}
-
-img.main-gif {
-  width: 230px;
-  margin: 14px auto;
-  border-radius: 18px;
-  display: block;
-}
-
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 30px;
-  font-size: 1.05em;
-  cursor: pointer;
-}
-
-.yes { background: #ff4d6d; color: white; }
-.no  { background: #f1f1f1; color: #ff4d6d; }
-.secondary { background: #eaeaea; color: #333; }
-.disabled { opacity: 0.5; cursor: not-allowed; }
+.yes{background:#ff4d6d;color:white}
+.no{background:#f1f1f1;color:#ff4d6d}
+.no.pulse{transform:scale(1.15)}
+.no.shrink{transform:scale(.9)}
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
 <!-- START -->
-<div class="card slide" id="start">
+<div class="card" id="start">
   <h1>Ma Belle Princessé, will you be my Valentine on February 14th? 💕</h1>
 
-  <!-- 🌸 UPDATED START GIF -->
+  <p id="startNoText"></p>
+
   <img id="startGif" class="main-gif"
-       src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYjd0YnNyMGM0empweXhqZHBtZWN0djAxbG4wNXlwaWt6dm80eTNqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o35sLcXzrteR4mrzLw/giphy.gif">
+  src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYjd0YnNyMGM0empweXhqZHBtZWN0djAxbG4wNXlwaWt6dm80eTNqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o35sLcXzrteR4mrzLw/giphy.gif">
 
   <button class="yes" onclick="showPage('letters')">Yes 💖</button>
-  <button class="no" id="startNo" onclick="startNoClicked()">No 😐</button>
-
-  <p id="startNoText"></p>
+  <button class="no" id="noBtn" onclick="noClicked()">No 😐</button>
 </div>
 
 <!-- LETTERS -->
 <div class="card hidden" id="letters">
-  <h1>💌 Letters for You</h1>
-  <button class="yes" onclick="showPage('letter1')">📩 Letter 1</button>
-  <button class="yes" onclick="showPage('letter2')">📩 Letter 2</button>
+  <h1>💌 Letters</h1>
+  <button class="yes" onclick="showPage('letter1')">Letter 1</button>
 </div>
 
 <!-- LETTER 1 -->
 <div class="card hidden" id="letter1">
   <h1>For my future wifey 💍🙈</h1>
   <p>
-    Depuis que tu fais partie de ma vie,  
-    tout semble un peu plus doux.  
+    Depuis que tu es entrée dans ma vie,  
+    quelque chose a changé doucement.  
     <br><br>
-    Ton sourire m’apaise,  
-    ta présence me rassure,  
-    et le temps passé avec toi me fait simplement du bien.  
+    Tout semble plus calme, plus sincère,  
+    comme si certaines choses avaient enfin trouvé leur place.  
     <br><br>
-    Sans pression, sans attente —  
-    juste du respect, de la tendresse  
-    et beaucoup de sincérité 🤍
+    Je n’attends rien, je ne force rien.  
+    Je voulais simplement que tu saches  
+    que ta présence compte beaucoup pour moi 🤍
   </p>
-  <button class="secondary" onclick="showPage('letters')">Back</button>
-</div>
-
-<!-- LETTER 2 -->
-<div class="card hidden" id="letter2">
-  <h1>An idea 💡</h1>
-  <button class="yes" onclick="showPage('idea1')">
-    A gentle idea — simple, no pressure, only if it feels right to you 🤍
-  </button>
-  <button class="secondary" onclick="showPage('letters')">Back</button>
-</div>
-
-<!-- IDEA -->
-<div class="card hidden" id="idea1">
-  <h1>Just us 🤍</h1>
-  <p>
-    A Netflix movie night together on Discord?  
-    <br><br>
-    A movie of your choice…  
-    or just talking and enjoying the time.
-  </p>
-  <button class="yes" onclick="showPage('success')">Yes 💖</button>
-  <button class="no" onclick="showPage('ideaNo')">No 😐</button>
-</div>
-
-<!-- IDEA NO -->
-<div class="card hidden" id="ideaNo">
-  <img class="main-gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
-  <p><strong>Okay 🤍</strong><br>Please share your decision with the admin.</p>
-
-  <button class="yes" onclick="showPage('idea1')">
-    Would you like to gently look again? 🤍
-  </button>
-
-  <button class="disabled">Or we do nothing at all</button>
-  <p>Unfortunately, resources are exhausted 😝😏</p>
 </div>
 
 <!-- SUCCESS -->
 <div class="card hidden" id="success">
-  <h1>🎉 Congratulations 💖</h1>
+  <h1>🥰</h1>
   <p>
-    You have successfully completed  
-    the selection process.  
-    <br><br>
-    Please share your decision  
-    with the <strong>Master Admin</strong> 😌
+    Please share your decision with your  
+    <strong>sweet teddy bear</strong>  
+    who is waiting for you 😁🥰
   </p>
 </div>
 
 </div>
 
 <script>
-const fallbackGif = "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif";
+const noBtn=document.getElementById("noBtn");
+const textEl=document.getElementById("startNoText");
+const gifEl=document.getElementById("startGif");
 
-/* 😔 15 SAD GIFs */
-const startNoOptions = [
-  { text:"Oh… that hurts a little 🥺", gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjB3NjR1N3EyNGdtZWZxaDZ3dm1sM2FsOXpnYXJrZmZlaGI4cjhlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUybVfQ4/giphy.gif" },
-  { text:"That makes me sad 😔", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzNnM2RiNnc3MGtxYjlldTl4a2N1MWoxejEzeDNnNDRmdjI1YmY1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTY1kHmcLsCsg/giphy.gif" },
-  { text:"My heart dropped 💔", gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyb2pmdWlhZmlpMWF6c3Z2bWh1bW91ajFzNGJ3dzhhYWtwOXc1dWNlZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ty9Sg8oHghPWg/giphy.gif" },
-  { text:"Hmm… that stings 😞", gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyMnlrMDRmbmNudXc4NDE3NXdxcjdmampqaWxnY213emd3dTRwbmN2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P53TSsopKicrm/giphy.gif" },
-  { text:"I didn’t expect that 🥺", gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYnE4MXQyazc5cnNxM3Aya3c0d3dqbzVjcmF1eHNkeWp5YWt0cnUxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OBNZCbTy1s8u8i7Wre/giphy.gif" },
-  { text:"That made me quiet 😔", gif:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZGR2cDI1cGVlaWtybDlqOWN0ZzNsYmg3Y2ZieHJqMWExNnJ2Z2VtZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oXB0K4oFw3fck/giphy.gif" },
-  { text:"Are you sure? 💔", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmpncGV4NnhqMnAxdWxvdWk5eHI1NXhsc3B5cno2ZjBoZ2Q3czA0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6gDSyjaOPwZ4A/giphy.gif" },
-  { text:"That really got me 😔", gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydzg3NGZnaXh3MXUyMGRtaDB1NmkwNWVydHdqYzdtcTdmYnNraXl5NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12WhkSmwGOGIUM/giphy.gif" },
-  { text:"My smile faded 😞", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyamdxM20ybW43a29jNml0dDVoZzE2dmMwcmZwNTZzNWhrbG5lazVoZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fm0FiSOfefH5m/giphy.gif" },
-  { text:"Okay… I hear you 😔", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyd2ViN3NtN3RwcXdyM2dka2YwMmt3ems2bDZ6c3EyNnRxcDZwb2g0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ToMjGpFVxYb2xdX3rCE/giphy.gif" }
+const noOptions=[
+ {text:"Oh… that hurts a little 🥺",gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjB3NjR1N3EyNGdtZWZxaDZ3dm1sM2FsOXpnYXJrZmZlaGI4cjhlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUybVfQ4/giphy.gif"},
+ {text:"That makes me sad 😔",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzNnM2RiNnc3MGtxYjlldTl4a2N1MWoxejEzeDNnNDRmdjI1YmY1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTY1kHmcLsCsg/giphy.gif"},
+ {text:"My heart dropped 💔",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyb2pmdWlhZmlpMWF6c3Z2bWh1bW91ajFzNGJ3dzhhYWtwOXc1dWNlZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ty9Sg8oHghPWg/giphy.gif"},
+ {text:"That really hurts 😞",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyMnlrMDRmbmNudXc4NDE3NXdxcjdmampqaWxnY213emd3dTRwbmN2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P53TSsopKicrm/giphy.gif"},
+ {text:"I didn’t expect that… 🥺",gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYnE4MXQyazc5cnNxM3Aya3c0d3dqbzVjcmF1eHNkeWp5YWt0cnUxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OBNZCbTy1s8u8i7Wre/giphy.gif"},
+ {text:"That made me quiet 😔",gif:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZGR2cDI1cGVlaWtybDlqOWN0ZzNsYmg3Y2ZieHJqMWExNnJ2Z2VtZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oXB0K4oFw3fck/giphy.gif"},
+ {text:"Are you sure? 💔",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmpncGV4NnhqMnAxdWxvdWk5eHI1NXhsc3B5cno2ZjBoZ2Q3czA0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6gDSyjaOPwZ4A/giphy.gif"},
+ {text:"That really got me 😔",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydzg3NGZnaXh3MXUyMGRtaDB1NmkwNWVydHdqYzdtcTdmYnNraXl5NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12WhkSmwGOGIUM/giphy.gif"},
+ {text:"My smile faded 😞",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyamdxM20ybW43a29jNml0dDVoZzE2dmMwcmZwNTZzNWhrbG5lazVoZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fm0FiSOfefH5m/giphy.gif"},
+ {text:"That surprised me… 😔",gif:"https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMDc0bGlwYzdwZHo3dDVmNWpsdTNycHQ1YmQ4a3hvN21uaDM1a2RuNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cEYFeDKVPTmRgIG9fmo/giphy.gif"},
+ {text:"I wasn’t ready for that 🥺",gif:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyN3c3cHg2ZGlubHJhbTYwZzY5bzYzMmh1dWFkeHhxc3ZiMHF1OHVyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oYtVHSxngR3lC/giphy.gif"},
+ {text:"That really hits 😔",gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmozMHZrYmIxdm9rNnl1amE4M2g2dTNsNHJzdnNjcmJlNHpieHptZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hzrvwvnbgIV6E/giphy.gif"},
+ {text:"I need a moment… 🥺",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNmRsYXdhczEwaWJxcHlkZTA4ejY4ZjdlcHA1YWY5Y2E2bjVtOGN3aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10167zoCnaL5le/giphy.gif"},
+ {text:"Trying to stay calm 😔",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyeGhpYjl3cjJ3bjNmZzRuZXl2NWFkYTJqbWV1dTF2Mmg3ZHM4eGp1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P6ONpz0bAieoE/giphy.gif"},
+ {text:"Okay… I hear you 😔",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyd2ViN3NtN3RwcXdyM2dka2YwMmt3ems2bDZ6c3EyNnRxcDZwb2g0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ToMjGpFVxYb2xdX3rCE/giphy.gif"}
 ];
 
-let startNoCount = 0;
-
-function startNoClicked() {
-  const opt = startNoOptions[startNoCount % startNoOptions.length];
-  document.getElementById("startNoText").innerText = opt.text;
-
-  const gif = document.getElementById("startGif");
-  gif.src = opt.gif;
-  gif.onerror = () => gif.src = fallbackGif;
-
-  const btn = document.getElementById("startNo");
-  const card = document.getElementById("start");
-
-  btn.style.position = "absolute";
-  btn.style.left = Math.random() * (card.clientWidth - btn.offsetWidth - 20) + "px";
-  btn.style.top  = Math.random() * 120 + "px";
-
-  startNoCount++;
+let noCount=0;
+function noClicked(){
+  const opt=noOptions[noCount%noOptions.length];
+  textEl.innerText=opt.text;
+  gifEl.src=opt.gif;
+  noBtn.classList.remove("pulse","shrink");
+  void noBtn.offsetWidth;
+  noBtn.classList.add(noCount%2===0?"pulse":"shrink");
+  noCount++;
 }
-
-function showPage(id) {
-  document.querySelectorAll('.card').forEach(c => {
-    c.classList.add('hidden');
-    c.classList.remove('slide');
-  });
-  const page = document.getElementById(id);
-  page.classList.remove('hidden');
-  page.classList.add('slide');
+function showPage(id){
+  document.querySelectorAll(".card").forEach(c=>c.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 }
 </script>
-
 </body>
 </html>
