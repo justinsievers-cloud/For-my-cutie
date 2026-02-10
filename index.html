@@ -9,10 +9,18 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  color: white;
   min-height: 100vh;
   overflow: hidden;
+  color: white;
+  background: linear-gradient(120deg, #ff6b81, #ff9a9e, #fbc2eb, #a18cd1);
+  background-size: 400% 400%;
+  animation: gradientMove 14s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .container {
@@ -26,77 +34,73 @@ body {
 
 .card {
   background: rgba(255,255,255,0.25);
-  padding: 28px;
-  border-radius: 22px;
+  padding: 30px;
+  border-radius: 26px;
   width: 100%;
-  max-width: 420px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  animation: fadeIn 0.5s ease;
+  max-width: 440px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
+/* ✨ soft slide animation */
+.slide {
+  animation: slideIn 0.35s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h1 {
   font-size: 1.8em;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 p {
   font-size: 1.05em;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 img {
-  width: 150px;
-  margin: 12px auto;
+  width: 220px;
+  max-width: 90%;
+  margin: 18px auto;
+  border-radius: 18px;
   display: block;
-  border-radius: 14px;
 }
 
 button {
   width: 100%;
-  padding: 15px;
+  padding: 14px;
   margin-top: 12px;
   border: none;
   border-radius: 30px;
-  font-size: 1.1em;
+  font-size: 1.05em;
   cursor: pointer;
   transition: transform 0.15s ease;
 }
 
 button:active {
-  transform: scale(0.94);
+  transform: scale(0.96);
 }
 
-.yes {
-  background: #ff4d6d;
-  color: white;
+.yes { background: #ff4d6d; color: white; }
+.no { background: white; color: #ff4d6d; }
+.secondary { background: rgba(255,255,255,0.9); color: #333; }
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.no {
-  background: white;
-  color: #ff4d6d;
-}
-
-.hidden {
-  display: none;
-}
-
-/* 💥 heart explosion */
-.explosion {
-  position: fixed;
-  font-size: 24px;
-  animation: explode 1s ease forwards;
-  pointer-events: none;
-}
-
-@keyframes explode {
-  from { transform: scale(0); opacity: 1; }
-  to { transform: translate(var(--x), var(--y)) scale(1); opacity: 0; }
-}
+.hidden { display: none; }
 </style>
 </head>
 
@@ -104,142 +108,108 @@ button:active {
 
 <div class="container">
 
-<!-- PAGE 1 -->
-<div class="card" id="page1">
+<!-- START -->
+<div class="card slide" id="start">
   <h1>Lana, will you be my Valentine on February 14th? 💕</h1>
-
-  <img id="gif" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-
-  <button class="yes" onclick="yesClicked(event)">
-    Yes 💖
-  </button>
-
-  <button class="no" id="noBtn" onclick="noClicked()">
-    No 😐
-  </button>
-
-  <p id="noText"></p>
+  <button class="yes" onclick="showPage('letters')">Yes 💖</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="card hidden" id="page2">
-  <h1>💍 Valentine Contract 💍</h1>
-  <p>
-    By clicking YES, you officially agreed  
-    to be my Valentine 💘  
-    <br><br>
-    I’m already excited for Valentine’s Day with you ✨
-  </p>
-
-  <button class="yes" onclick="showPage('page3')">
-    Continue 💌
-  </button>
-</div>
-
-<!-- PAGE 3 -->
-<div class="card hidden" id="page3">
-  <h1>💌 Letters for You, Lana 💌</h1>
+<!-- LETTERS -->
+<div class="card hidden" id="letters">
+  <h1>💌 Letters for You</h1>
   <button class="yes" onclick="showPage('letter1')">📩 Letter 1</button>
   <button class="yes" onclick="showPage('letter2')">📩 Letter 2</button>
 </div>
 
 <!-- LETTER 1 -->
 <div class="card hidden" id="letter1">
-  <h1>My Lana 💖</h1>
+  <h1>For my future wifey 💍</h1>
   <p>
-    Your smile feels like comfort,  
-    your laugh feels like home,  
-    and being with you feels right.  
+    Depuis que tu fais partie de ma vie,  
+    tout semble un peu plus doux.  
     <br><br>
-    I’m already counting the days  
-    until Valentine’s Day with you ✨
+    Ton sourire m’apaise,  
+    ta présence me rassure,  
+    et le temps passé avec toi me fait simplement du bien.  
+    <br><br>
+    Sans pression, sans attente —  
+    seulement avec beaucoup de respect,  
+    de tendresse et de sincérité 🤍
   </p>
-  <button class="yes" onclick="showPage('page3')">Back 💌</button>
+  <button class="secondary" onclick="showPage('letters')">Back</button>
 </div>
 
 <!-- LETTER 2 -->
 <div class="card hidden" id="letter2">
-  <h1>Our Valentine’s Plan 💘</h1>
-  <p>How should we spend Valentine’s Day?</p>
-  <button class="yes">🍝 Dinner together</button>
-  <button class="yes">🎬 Cozy movie night</button>
+  <h1>An idea 💡</h1>
+  <button class="yes" onclick="showPage('idea1')">
+    A gentle idea — simple, no pressure, only if it feels right to you 🤍
+  </button>
+  <button class="secondary" onclick="showPage('letters')">Back</button>
+</div>
+
+<!-- IDEA 1 -->
+<div class="card hidden" id="idea1">
+  <h1>Just us 🤍</h1>
+  <p>
+    What do you think about a Netflix movie night together on Discord?  
+    <br><br>
+    We can watch a movie of your choice…  
+    or simply talk and enjoy the time together.
+  </p>
+  <button class="yes">Yes 💖</button>
+  <button class="no" onclick="showPage('ideaNo')">No 😐</button>
+  <button class="secondary" onclick="showPage('idea2')">Another idea 💡</button>
+  <button class="secondary" onclick="showPage('letter2')">Back</button>
+</div>
+
+<!-- IDEA NO -->
+<div class="card hidden" id="ideaNo">
+  <img src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" alt="sad gif">
+  <p>
+    Okay 🤍  
+    <br>
+    please share your decision with the admin.
+  </p>
+
+  <button class="yes" onclick="showPage('idea1')">
+    Would you like to gently go back and look at it again? 🤍
+  </button>
+
+  <button class="disabled">
+    Or we do nothing at all
+  </button>
+  <p style="font-size:0.9em; opacity:0.85;">
+    Unfortunately, the resources for this option have been exhausted 😝😏
+  </p>
+</div>
+
+<!-- IDEA 2 -->
+<div class="card hidden" id="idea2">
+  <h1>Another thought 🤍</h1>
+  <p>
+    I could come to you…  
+    <br><br>
+    only if you feel comfortable and it’s not too much.  
+    <br><br>
+    I respect every decision you make 💋  
+    I never want to do anything that makes you uncomfortable.
+  </p>
+  <button class="secondary" onclick="showPage('idea1')">Back</button>
 </div>
 
 </div>
 
 <script>
-const noOptions = [
-  { text: "Wait… what? 😳", gif: "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" },
-  { text: "I think you misclicked 😌", gif: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" },
-  { text: "That doesn’t feel right 🤨", gif: "https://media.giphy.com/media/fnHxVS8gD2Z0SBFuYn/giphy.gif" },
-  { text: "No is not an option 😏", gif: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" },
-  { text: "Nice try 😌", gif: "https://media.giphy.com/media/3o6ZsZKn2nGkzZ0H7G/giphy.gif" },
-  { text: "Come on… 💕", gif: "https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif" },
-  { text: "That button is lying 😅", gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif" },
-  { text: "I don’t believe you 🤔", gif: "https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" },
-  { text: "Error 404: No not found ❌", gif: "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" },
-  { text: "Try again 😏", gif: "https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif" },
-  { text: "Be honest… 😌", gif: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
-  { text: "Still no? 😈", gif: "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" },
-  { text: "Suspicious… 🤨", gif: "https://media.giphy.com/media/3o7btMCltyDvSgF92E/giphy.gif" },
-  { text: "Not buying it 😏", gif: "https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" },
-  { text: "One more try 💖", gif: "https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif" },
-  { text: "Your finger slipped 😅", gif: "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif" },
-  { text: "That’s illegal 😤", gif: "https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
-  { text: "Nice attempt 😈", gif: "https://media.giphy.com/media/3o6ZtpWvwnhf34Oj0A/giphy.gif" },
-  { text: "We both know the answer 😌", gif: "https://media.giphy.com/media/26AHqztlb4CzG3WTK/giphy.gif" },
-  { text: "Try again… slowly 😏", gif: "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" }
-];
-
-let noCount = 0;
-
-function noClicked() {
-  const current = noOptions[noCount % noOptions.length];
-  document.getElementById("noText").innerText = current.text;
-  document.getElementById("gif").src = current.gif;
-
-  const btn = document.getElementById("noBtn");
-  btn.style.position = "fixed";
-
-  const jump = Math.min(60 + noCount * 25, window.innerWidth);
-
-  let x = (Math.random() * jump) * (Math.random() > 0.5 ? 1 : -1);
-  let y = (Math.random() * jump) * (Math.random() > 0.5 ? 1 : -1);
-
-  let newX = btn.offsetLeft + x;
-  let newY = btn.offsetTop + y;
-
-  newX = Math.max(10, Math.min(newX, window.innerWidth - btn.offsetWidth - 10));
-  newY = Math.max(10, Math.min(newY, window.innerHeight - btn.offsetHeight - 10));
-
-  btn.style.left = newX + "px";
-  btn.style.top = newY + "px";
-
-  noCount++;
-}
-
-function yesClicked(e) {
-  explodeHearts(e.clientX, e.clientY);
-  showPage('page2');
-}
-
-function explodeHearts(x, y) {
-  for (let i = 0; i < 24; i++) {
-    const heart = document.createElement("div");
-    heart.className = "explosion";
-    heart.innerText = "💖";
-    heart.style.left = x + "px";
-    heart.style.top = y + "px";
-    heart.style.setProperty("--x", (Math.random()*240-120)+"px");
-    heart.style.setProperty("--y", (Math.random()*240-120)+"px");
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 1000);
-  }
-}
-
 function showPage(id) {
-  document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+  document.querySelectorAll('.card').forEach(c => {
+    c.classList.add('hidden');
+    c.classList.remove('slide');
+  });
+
+  const page = document.getElementById(id);
+  page.classList.remove('hidden');
+  page.classList.add('slide');
 }
 </script>
 
