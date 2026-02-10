@@ -13,10 +13,10 @@ body {
   overflow: hidden;
   background: linear-gradient(120deg, #ff6b81, #ff9a9e, #fbc2eb, #a18cd1);
   background-size: 400% 400%;
-  animation: gradientMove 14s ease infinite;
+  animation: bgMove 14s ease infinite;
 }
 
-@keyframes gradientMove {
+@keyframes bgMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -30,9 +30,15 @@ body {
   padding: 20px;
 }
 
+/* 🌸 CARD BACKGROUND: PINK / ROSA / RED */
 .card {
   position: relative;
-  background: rgba(255,255,255,0.92);
+  background: linear-gradient(
+    160deg,
+    rgba(255,235,238,0.96),
+    rgba(255,205,210,0.94),
+    rgba(255,224,230,0.95)
+  );
   padding: 34px 26px;
   border-radius: 28px;
   width: 100%;
@@ -50,7 +56,7 @@ body {
 }
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
@@ -63,7 +69,7 @@ p {
   line-height: 1.6;
 }
 
-img {
+img.main-gif {
   width: 230px;
   margin: 14px auto;
   border-radius: 18px;
@@ -81,20 +87,21 @@ button {
 }
 
 .yes { background: #ff4d6d; color: white; }
-.no  { background: #f1f1f1; color: #ff4d6d; }
+.no { background: #f1f1f1; color: #ff4d6d; }
 .secondary { background: #eaeaea; color: #333; }
 .disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* 🌸 floating flowers & hearts */
-.decor {
+/* 🌹 REAL FLOWER STICKERS */
+.sticker {
   position: absolute;
-  font-size: 26px;
-  opacity: 0.8;
-  animation: float 10s linear infinite;
+  width: 90px;
+  opacity: 0.85;
+  pointer-events: none;
+  animation: floatSlow 18s linear infinite;
 }
-@keyframes float {
-  from { transform: translateY(100vh); }
-  to   { transform: translateY(-120vh); }
+@keyframes floatSlow {
+  from { transform: translateY(120vh) rotate(0deg); }
+  to { transform: translateY(-140vh) rotate(360deg); }
 }
 </style>
 </head>
@@ -107,9 +114,8 @@ button {
 <div class="card slide" id="start">
   <h1>Lana, will you be my Valentine on February 14th? 💕</h1>
 
-  <img id="startGif"
-       src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
-       onerror="this.src=fallbackGif">
+  <img id="startGif" class="main-gif"
+       src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
 
   <button class="yes" onclick="showPage('flowers')">Yes 💖</button>
   <button class="no" id="startNo" onclick="startNoClicked()">No 😐</button>
@@ -119,14 +125,25 @@ button {
 
 <!-- FLOWERS PAGE -->
 <div class="card hidden" id="flowers">
-  <h1>🌹🌸🤍</h1>
-  <p>You’re surrounded by flowers… just for you 💕</p>
+
+  <!-- 🌹 Roses -->
+  <img class="sticker" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80" style="left:5%; animation-delay:0s;">
+  <img class="sticker" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=300&q=80" style="left:75%; animation-delay:3s;">
+
+  <!-- 🌸 Orchids -->
+  <img class="sticker" src="https://images.unsplash.com/photo-1535930749574-1399327ce78f?auto=format&fit=crop&w=300&q=80" style="left:25%; animation-delay:6s;">
+  <img class="sticker" src="https://images.unsplash.com/photo-1551892589-865f6986942d?auto=format&fit=crop&w=300&q=80" style="left:55%; animation-delay:9s;">
+
+  <!-- 🤍 Lilies -->
+  <img class="sticker" src="https://images.unsplash.com/photo-1495433324511-bf8e92934d90?auto=format&fit=crop&w=300&q=80" style="left:40%; animation-delay:12s;">
+
+  <h1>Flowers, just for you 🌹🌸🤍</h1>
   <button class="yes" onclick="showPage('letters')">Continue 💖</button>
 </div>
 
 <!-- LETTERS -->
 <div class="card hidden" id="letters">
-  <h1>💌 Letters for You 💋🌹</h1>
+  <h1>💌 Letters for You</h1>
   <button class="yes" onclick="showPage('letter1')">📩 Letter 1</button>
   <button class="yes" onclick="showPage('letter2')">📩 Letter 2</button>
 </div>
@@ -136,73 +153,58 @@ button {
   <h1>For my future wifey 💍🙈</h1>
   <p>
     Depuis que tu fais partie de ma vie,  
-    tout semble un peu plus doux. 🌸  
+    tout semble un peu plus doux.  
     <br><br>
     Ton sourire m’apaise,  
     ta présence me rassure,  
-    et le temps passé avec toi me fait simplement du bien 💋  
+    et le temps passé avec toi me fait simplement du bien.  
     <br><br>
     Sans pression, sans attente —  
-    juste beaucoup de respect,  
-    de tendresse et d’amour 🤍🌹
+    juste du respect, de la tendresse  
+    et beaucoup de sincérité 🤍
   </p>
   <button class="secondary" onclick="showPage('letters')">Back</button>
 </div>
 
 <!-- LETTER 2 -->
 <div class="card hidden" id="letter2">
-  <h1>An idea 💡💖</h1>
+  <h1>An idea 💡</h1>
   <button class="yes" onclick="showPage('idea1')">
     A gentle idea — simple, no pressure, only if it feels right to you 🤍
   </button>
   <button class="secondary" onclick="showPage('letters')">Back</button>
 </div>
 
-<!-- IDEA 1 -->
+<!-- IDEA -->
 <div class="card hidden" id="idea1">
-  <h1>Just us 🤍💋</h1>
+  <h1>Just us 🤍</h1>
   <p>
-    Netflix movie night together on Discord? 🎬🌹  
+    A Netflix movie night together on Discord?  
     <br><br>
     A movie of your choice…  
-    or just talking and enjoying the time 💖
+    or just talking and enjoying the time.
   </p>
   <button class="yes" onclick="showPage('success')">Yes 💖</button>
   <button class="no" onclick="showPage('ideaNo')">No 😐</button>
-  <button class="secondary" onclick="showPage('idea2')">Another idea 💡</button>
 </div>
 
 <!-- IDEA NO -->
 <div class="card hidden" id="ideaNo">
-  <img src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
+  <img class="main-gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
   <p><strong>Okay 🤍</strong><br>Please share your decision with the admin.</p>
-
   <button class="yes" onclick="showPage('idea1')">
-    Would you like to gently go back and look again? 🤍
+    Would you like to gently look again? 🤍
   </button>
-
   <button class="disabled">Or we do nothing at all</button>
   <p>Unfortunately, resources are exhausted 😝😏</p>
 </div>
 
-<!-- IDEA 2 -->
-<div class="card hidden" id="idea2">
-  <h1>Another thought 🤍🌹</h1>
-  <p>
-    I could come to you… 💋  
-    <br><br>
-    only if you feel comfortable.  
-    I respect every decision you make 🤍
-  </p>
-  <button class="secondary" onclick="showPage('idea1')">Back</button>
-</div>
-
 <!-- SUCCESS -->
 <div class="card hidden" id="success">
-  <h1>🎉 Congratulations 💖🌹</h1>
+  <h1>🎉 Congratulations 💖</h1>
   <p>
     You have successfully completed  
-    the selection process 💋  
+    the selection process.  
     <br><br>
     Please share your decision  
     with the <strong>Master Admin</strong> 😌
@@ -214,22 +216,23 @@ button {
 <script>
 const fallbackGif = "https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif";
 
+/* 15 matching No reactions */
 const startNoOptions = [
-  { text: "Wait… what? 😳", gif: "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif" },
-  { text: "That felt suspicious 🤨", gif: "https://media.giphy.com/media/3orieZg0iN3GkZyF1S/giphy.gif" },
-  { text: "I think that button lied 😅", gif: "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif" },
-  { text: "Hmm… interesting 😏", gif: "https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif" },
-  { text: "Try again maybe? 🤍", gif: "https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" },
-  { text: "That kinda hurt 🥺", gif: "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" },
-  { text: "Are you really sure? 😌", gif: "https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif" },
-  { text: "I’ll pretend I didn’t see that 😅", gif: "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" },
-  { text: "My heart says YES 💖", gif: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
-  { text: "That button is broken 😝", gif: "https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" },
-  { text: "Nice try 😏", gif: "https://media.giphy.com/media/3o6ZtpWvwnhf34Oj0A/giphy.gif" },
-  { text: "Hmm… again 😌", gif: "https://media.giphy.com/media/l0HlQ7LRalY8Yv5x6/giphy.gif" },
-  { text: "That’s illegal 😤", gif: "https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
-  { text: "Be honest 🙈", gif: "https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" },
-  { text: "One more time 💕", gif: "https://media.giphy.com/media/3o6Zt8MgUuvSbkZYWc/giphy.gif" }
+  { text:"Wait… what? 😳", gif:"https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" },
+  { text:"That was unexpected 😅", gif:"https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif" },
+  { text:"Hmm… are you sure? 🤨", gif:"https://media.giphy.com/media/3orieZg0iN3GkZyF1S/giphy.gif" },
+  { text:"That feels suspicious 🤔", gif:"https://media.giphy.com/media/3o6ZsX2yKZK4mV6Yy4/giphy.gif" },
+  { text:"Nice try 😏", gif:"https://media.giphy.com/media/3o6ZtpWvwnhf34Oj0A/giphy.gif" },
+  { text:"Are you teasing me? 😌", gif:"https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif" },
+  { text:"That button is lying 😅", gif:"https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif" },
+  { text:"That kinda hurt 🥺", gif:"https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" },
+  { text:"Ouch… okay 😔", gif:"https://media.giphy.com/media/l0HlQ7LRalY8Yv5x6/giphy.gif" },
+  { text:"My heart says yes 💔", gif:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
+  { text:"Let’s try again 🤍", gif:"https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" },
+  { text:"Take your time 😌", gif:"https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" },
+  { text:"I don’t believe you 😅", gif:"https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" },
+  { text:"That choice feels illegal 😝", gif:"https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
+  { text:"One more time… 💕", gif:"https://media.giphy.com/media/3o6Zt8MgUuvSbkZYWc/giphy.gif" }
 ];
 
 let startNoCount = 0;
@@ -237,6 +240,7 @@ let startNoCount = 0;
 function startNoClicked() {
   const opt = startNoOptions[startNoCount % startNoOptions.length];
   document.getElementById("startNoText").innerText = opt.text;
+
   const gif = document.getElementById("startGif");
   gif.src = opt.gif;
   gif.onerror = () => gif.src = fallbackGif;
