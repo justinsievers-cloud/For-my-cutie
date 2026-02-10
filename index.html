@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine 💘</title>
+<title>A small question 🤍</title>
 
 <style>
 body{
@@ -27,7 +27,7 @@ body{
   padding:20px;
 }
 .card{
-  background:rgba(255,235,238,0.96);
+  background:rgba(255,235,238,0.97);
   padding:32px 26px;
   border-radius:28px;
   max-width:440px;
@@ -37,14 +37,16 @@ body{
   color:#2b2b2b;
 }
 .hidden{display:none}
-h1{font-size:1.8em;margin-bottom:12px}
+h1{font-size:1.7em;margin-bottom:12px}
 p{font-size:1.05em;line-height:1.6}
+
 img.main-gif{
   width:240px;
   margin:14px auto;
   border-radius:18px;
   display:block;
 }
+
 button{
   width:100%;
   padding:14px;
@@ -57,6 +59,9 @@ button{
 }
 .yes{background:#ff4d6d;color:white}
 .no{background:#f1f1f1;color:#ff4d6d}
+.secondary{background:#eaeaea;color:#333}
+.disabled{opacity:.5;cursor:not-allowed}
+
 .no.pulse{transform:scale(1.15)}
 .no.shrink{transform:scale(.9)}
 </style>
@@ -65,9 +70,16 @@ button{
 <body>
 <div class="container">
 
+<!-- INTRO -->
+<div class="card" id="intro">
+  <h1>I have a small question for you… 🤍</h1>
+  <p>Nothing serious. Just something from the heart.</p>
+  <button class="yes" onclick="showPage('start')">Continue 💌</button>
+</div>
+
 <!-- START -->
-<div class="card" id="start">
-  <h1>Ma Belle Princessé, will you be my Valentine💕</h1>
+<div class="card hidden" id="start">
+  <h1>Ma Belle Princessé, will you be my Valentine? 💕</h1>
 
   <p id="startNoText"></p>
 
@@ -80,8 +92,9 @@ button{
 
 <!-- LETTERS -->
 <div class="card hidden" id="letters">
-  <h1>💌 Letters</h1>
-  <button class="yes" onclick="showPage('letter1')">Letter 1</button>
+  <h1>💌 Letters for you</h1>
+  <button class="yes" onclick="showPage('letter1')">📩 Letter 1</button>
+  <button class="yes" onclick="showPage('letter2')">📩 Letter 2</button>
 </div>
 
 <!-- LETTER 1 -->
@@ -91,19 +104,70 @@ button{
     Depuis que tu es entrée dans ma vie,  
     quelque chose a changé doucement.  
     <br><br>
-    Tout semble plus calme, plus sincère,  
-    comme si certaines choses avaient enfin trouvé leur place.  
+    Tout semble plus calme, plus vrai.  
+    Ta présence me fait simplement du bien.  
     <br><br>
     Je n’attends rien, je ne force rien.  
-    Je voulais simplement que tu saches  
-    que ta présence compte beaucoup pour moi 🤍
+    Je voulais juste être honnête avec toi 🤍
   </p>
+  <button class="secondary" onclick="showPage('letters')">Back</button>
+</div>
+
+<!-- LETTER 2 -->
+<div class="card hidden" id="letter2">
+  <h1>A gentle idea 🤍</h1>
+  <button class="yes" onclick="showPage('idea')">
+    Simple, relaxed, no pressure at all
+  </button>
+  <button class="secondary" onclick="showPage('letters')">Back</button>
+</div>
+
+<!-- IDEA -->
+<div class="card hidden" id="idea">
+  <h1>Just us 🤍</h1>
+  <p>
+    A Netflix movie night on Discord?  
+    <br><br>
+    Or just talking and enjoying the time.
+  </p>
+  <button class="yes" onclick="showPage('success')">Yes 💖</button>
+  <button class="no" onclick="showPage('ideaNo')">No 😐</button>
+  <button class="secondary" onclick="showPage('ideaAlt')">Another idea 💭</button>
+</div>
+
+<!-- IDEA ALT -->
+<div class="card hidden" id="ideaAlt">
+  <h1>Another idea 🤍</h1>
+  <p>
+    I could come see you…  
+    <br><br>
+    Only if you feel comfortable.  
+    No pressure, ever.
+  </p>
+  <button class="secondary" onclick="showPage('idea')">Back</button>
+</div>
+
+<!-- IDEA NO -->
+<div class="card hidden" id="ideaNo">
+  <img class="main-gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
+  <p>
+    That’s completely okay 🤍  
+    <br><br>
+    Please share your decision with your  
+    <strong>sweet teddy bear</strong>  
+    who is waiting for you 😁🥰
+  </p>
+  <button class="yes" onclick="showPage('idea')">Want to gently look again? 🤍</button>
+  <button class="disabled">Or we do nothing at all</button>
+  <p>Unfortunately, resources are exhausted 😝😏</p>
 </div>
 
 <!-- SUCCESS -->
 <div class="card hidden" id="success">
-  <h1>🥰</h1>
+  <h1>💖</h1>
   <p>
+    Thank you for your honesty 🤍  
+    <br><br>
     Please share your decision with your  
     <strong>sweet teddy bear</strong>  
     who is waiting for you 😁🥰
@@ -117,29 +181,30 @@ const noBtn=document.getElementById("noBtn");
 const textEl=document.getElementById("startNoText");
 const gifEl=document.getElementById("startGif");
 
+/* 🔒 FINAL: 15/15 NO GIFs – FIXED */
 const noOptions=[
- {text:"Oh… that hurts a little 🥺",gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjB3NjR1N3EyNGdtZWZxaDZ3dm1sM2FsOXpnYXJrZmZlaGI4cjhlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUybVfQ4/giphy.gif"},
- {text:"That makes me sad 😔",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzNnM2RiNnc3MGtxYjlldTl4a2N1MWoxejEzeDNnNDRmdjI1YmY1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTY1kHmcLsCsg/giphy.gif"},
- {text:"My heart dropped 💔",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyb2pmdWlhZmlpMWF6c3Z2bWh1bW91ajFzNGJ3dzhhYWtwOXc1dWNlZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ty9Sg8oHghPWg/giphy.gif"},
- {text:"That really hurts 😞",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyMnlrMDRmbmNudXc4NDE3NXdxcjdmampqaWxnY213emd3dTRwbmN2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P53TSsopKicrm/giphy.gif"},
- {text:"I didn’t expect that… 🥺",gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYnE4MXQyazc5cnNxM3Aya3c0d3dqbzVjcmF1eHNkeWp5YWt0cnUxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OBNZCbTy1s8u8i7Wre/giphy.gif"},
- {text:"That made me quiet 😔",gif:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZGR2cDI1cGVlaWtybDlqOWN0ZzNsYmg3Y2ZieHJqMWExNnJ2Z2VtZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oXB0K4oFw3fck/giphy.gif"},
- {text:"Are you sure? 💔",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmpncGV4NnhqMnAxdWxvdWk5eHI1NXhsc3B5cno2ZjBoZ2Q3czA0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6gDSyjaOPwZ4A/giphy.gif"},
- {text:"That really got me 😔",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydzg3NGZnaXh3MXUyMGRtaDB1NmkwNWVydHdqYzdtcTdmYnNraXl5NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12WhkSmwGOGIUM/giphy.gif"},
- {text:"My smile faded 😞",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyamdxM20ybW43a29jNml0dDVoZzE2dmMwcmZwNTZzNWhrbG5lazVoZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fm0FiSOfefH5m/giphy.gif"},
- {text:"That surprised me… 😔",gif:"https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMDc0bGlwYzdwZHo3dDVmNWpsdTNycHQ1YmQ4a3hvN21uaDM1a2RuNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cEYFeDKVPTmRgIG9fmo/giphy.gif"},
- {text:"I wasn’t ready for that 🥺",gif:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyN3c3cHg2ZGlubHJhbTYwZzY5bzYzMmh1dWFkeHhxc3ZiMHF1OHVyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oYtVHSxngR3lC/giphy.gif"},
- {text:"That really hits 😔",gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmozMHZrYmIxdm9rNnl1amE4M2g2dTNsNHJzdnNjcmJlNHpieHptZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hzrvwvnbgIV6E/giphy.gif"},
- {text:"I need a moment… 🥺",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNmRsYXdhczEwaWJxcHlkZTA4ejY4ZjdlcHA1YWY5Y2E2bjVtOGN3aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10167zoCnaL5le/giphy.gif"},
- {text:"Trying to stay calm 😔",gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyeGhpYjl3cjJ3bjNmZzRuZXl2NWFkYTJqbWV1dTF2Mmg3ZHM4eGp1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P6ONpz0bAieoE/giphy.gif"},
- {text:"Okay… I hear you 😔",gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyd2ViN3NtN3RwcXdyM2dka2YwMmt3ems2bDZ6c3EyNnRxcDZwb2g0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ToMjGpFVxYb2xdX3rCE/giphy.gif"}
+ {t:"Oh… that hurts a little 🥺",g:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjB3NjR1N3EyNGdtZWZxaDZ3dm1sM2FsOXpnYXJrZmZlaGI4cjhlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUybVfQ4/giphy.gif"},
+ {t:"That makes me sad 😔",g:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzNnM2RiNnc3MGtxYjlldTl4a2N1MWoxejEzeDNnNDRmdjI1YmY1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTY1kHmcLsCsg/giphy.gif"},
+ {t:"My heart dropped 💔",g:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyb2pmdWlhZmlpMWF6c3Z2bWh1bW91ajFzNGJ3dzhhYWtwOXc1dWNlZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ty9Sg8oHghPWg/giphy.gif"},
+ {t:"That really hurts 😞",g:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyMnlrMDRmbmNudXc4NDE3NXdxcjdmampqaWxnY213emd3dTRwbmN2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P53TSsopKicrm/giphy.gif"},
+ {t:"I didn’t expect that… 🥺",g:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYnE4MXQyazc5cnNxM3Aya3c0d3dqbzVjcmF1eHNkeWp5YWt0cnUxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OBNZCbTy1s8u8i7Wre/giphy.gif"},
+ {t:"That made me quiet 😔",g:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZGR2cDI1cGVlaWtybDlqOWN0ZzNsYmg3Y2ZieHJqMWExNnJ2Z2VtZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oXB0K4oFw3fck/giphy.gif"},
+ {t:"Are you sure? 💔",g:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmpncGV4NnhqMnAxdWxvdWk5eHI1NXhsc3B5cno2ZjBoZ2Q3czA0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6gDSyjaOPwZ4A/giphy.gif"},
+ {t:"That really got me 😔",g:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydzg3NGZnaXh3MXUyMGRtaDB1NmkwNWVydHdqYzdtcTdmYnNraXl5NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12WhkSmwGOGIUM/giphy.gif"},
+ {t:"My smile faded 😞",g:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyamdxM20ybW43a29jNml0dDVoZzE2dmMwcmZwNTZzNWhrbG5lazVoZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fm0FiSOfefH5m/giphy.gif"},
+ {t:"That surprised me… 😔",g:"https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMDc0bGlwYzdwZHo3dDVmNWpsdTNycHQ1YmQ4a3hvN21uaDM1a2RuNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cEYFeDKVPTmRgIG9fmo/giphy.gif"},
+ {t:"I wasn’t ready for that 🥺",g:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyN3c3cHg2ZGlubHJhbTYwZzY5bzYzMmh1dWFkeHhxc3ZiMHF1OHVyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oYtVHSxngR3lC/giphy.gif"},
+ {t:"That really hits 😔",g:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmozMHZrYmIxdm9rNnl1amE4M2g2dTNsNHJzdnNjcmJlNHpieHptZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hzrvwvnbgIV6E/giphy.gif"},
+ {t:"I need a moment… 🥺",g:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNmRsYXdhczEwaWJxcHlkZTA4ejY4ZjdlcHA1YWY5Y2E2bjVtOGN3aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10167zoCnaL5le/giphy.gif"},
+ {t:"Trying to stay calm 😔",g:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyeGhpYjl3cjJ3bjNmZzRuZXl2NWFkYTJqbWV1dTF2Mmg3ZHM4eGp1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P6ONpz0bAieoE/giphy.gif"},
+ {t:"Okay… I hear you 😔",g:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyd2ViN3NtN3RwcXdyM2dka2YwMmt3ems2bDZ6c3EyNnRxcDZwb2g0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ToMjGpFVxYb2xdX3rCE/giphy.gif"}
 ];
 
 let noCount=0;
 function noClicked(){
-  const opt=noOptions[noCount%noOptions.length];
-  textEl.innerText=opt.text;
-  gifEl.src=opt.gif;
+  const o=noOptions[noCount%noOptions.length];
+  textEl.innerText=o.t;
+  gifEl.src=o.g;
   noBtn.classList.remove("pulse","shrink");
   void noBtn.offsetWidth;
   noBtn.classList.add(noCount%2===0?"pulse":"shrink");
