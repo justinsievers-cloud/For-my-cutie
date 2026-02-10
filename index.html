@@ -47,6 +47,21 @@ img.main-gif{
   display:block;
 }
 
+.countdown{
+  font-size:2.2em;
+  font-weight:600;
+  color:#ff4d6d;
+}
+.heart{
+  font-size:2.6em;
+  animation:pulse 1s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
 button{
   width:100%;
   padding:14px;
@@ -55,21 +70,17 @@ button{
   border-radius:30px;
   font-size:1.05em;
   cursor:pointer;
-  transition:transform .25s ease;
 }
 .yes{background:#ff4d6d;color:white}
 .no{background:#f1f1f1;color:#ff4d6d}
 .secondary{background:#eaeaea;color:#333}
 .disabled{opacity:.5;cursor:not-allowed}
-
-.no.pulse{transform:scale(1.15)}
-.no.shrink{transform:scale(.9)}
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 BACKGROUND MUSIC -->
+<!-- 🎵 MUSIC -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -80,19 +91,27 @@ button{
 <div class="card" id="intro">
   <h1>I have a small question for you… 🤍</h1>
   <p>Nothing serious. Just something from the heart.</p>
-  <button class="yes" onclick="showPage('start')">Continue 💌</button>
+  <button class="yes" onclick="showPage('wait')">Continue 💌</button>
+</div>
+
+<!-- WAIT / COUNTDOWN -->
+<div class="card hidden" id="wait">
+  <h1>Why are you changing your mind… 🥺</h1>
+  <img class="main-gif"
+    src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUycmZoM29ncmFnMml3dDVubDB6c3RiaWI3NzlidWprcGFnYWZzY2h1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dJYoOVAWf2QkU/giphy.gif">
+  <div class="countdown" id="countdown">15</div>
+  <div id="heart" class="heart hidden">💖</div>
+  <p>Okay then…</p>
 </div>
 
 <!-- START -->
 <div class="card hidden" id="start">
   <h1>Ma Belle Princessé, will you be my Valentine? 💕</h1>
-
   <p id="startNoText"></p>
 
   <img id="startGif" class="main-gif"
-  src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYjd0YnNyMGM0empweXhqZHBtZWN0djAxbG4wNXlwaWt6dm80eTNqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o35sLcXzrteR4mrzLw/giphy.gif">
+    src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYjd0YnNyMGM0empweXhqZHBtZWN0djAxbG4wNXlwaWt6dm80eTNqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o35sLcXzrteR4mrzLw/giphy.gif">
 
-  <!-- 🎵 MUSIC STARTS HERE -->
   <button class="yes" onclick="playMusic(); showPage('letters')">Yes 💖</button>
   <button class="no" id="noBtn" onclick="noClicked()">No 😐</button>
 </div>
@@ -132,85 +151,78 @@ button{
 <!-- IDEA -->
 <div class="card hidden" id="idea">
   <h1>Just us 🤍</h1>
-  <p>
-    A Netflix movie night on Discord?  
-    <br><br>
-    Or just talking and enjoying the time.
-  </p>
-
+  <p>A Netflix movie night on Discord? Or just talking.</p>
   <button class="yes" onclick="showPage('success')">Yes 💖</button>
-
-  <!-- 🔇 MUSIC STOPS HERE -->
   <button class="no" onclick="stopMusic(); showPage('ideaNo')">No 😐</button>
-
-  <button class="secondary" onclick="showPage('ideaAlt')">Another idea 💭</button>
-</div>
-
-<!-- IDEA ALT -->
-<div class="card hidden" id="ideaAlt">
-  <h1>Another idea 🤍</h1>
-  <p>
-    I could come see you…  
-    <br><br>
-    Only if you feel comfortable.  
-    No pressure, ever.
-  </p>
-  <button class="secondary" onclick="showPage('idea')">Back</button>
 </div>
 
 <!-- IDEA NO -->
 <div class="card hidden" id="ideaNo">
   <img class="main-gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
   <p>
-    That’s completely okay 🤍  
-    <br><br>
     Please share your decision with your  
-    <strong>sad teddy bear</strong> 🥺🤧  
-    who is waiting for you
+    <strong>sad teddy bear</strong> 🥺🤧
   </p>
-
-  <!-- 🎵 MUSIC RESUMES -->
   <button class="yes" onclick="playMusic(); showPage('idea')">
     Want to gently look again? 🤍
   </button>
-
-  <button class="disabled">Or we do nothing at all</button>
-  <p>Unfortunately, resources are exhausted 😝😏</p>
 </div>
 
 <!-- SUCCESS -->
 <div class="card hidden" id="success">
   <h1>💖</h1>
   <p>
-    Thank you for your honesty 🤍  
-    <br><br>
     Please share your decision with your  
-    <strong>sweet happy teddy bear</strong> 🥹🥰😍  
-    who is waiting for you
+    <strong>sweet happy teddy bear</strong> 🥹🥰😍
   </p>
-
   <img class="main-gif"
-  src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUybDVicWM2bDRteThjbThrMGJ4MDJpeXBtMWxxN2h4cWhzbTMydDQ0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aQwvKKi4Lv3t63nZl9/giphy.gif">
+    src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUybDVicWM2bDRteThjbThrMGJ4MDJpeXBtMWxxN2h4cWhzbTMydDQ0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aQwvKKi4Lv3t63nZl9/giphy.gif">
+  <button class="secondary" onclick="stopMusic(); showPage('intro')">
+    Back to the start ↩️
+  </button>
 </div>
 
 </div>
 
 <script>
+/* MUSIC */
+const music=document.getElementById("bgMusic");
+function playMusic(){music.volume=0.6; music.play().catch(()=>{});}
+function stopMusic(){music.pause();}
+
+/* PAGE NAV */
+let timer;
+function showPage(id){
+  document.querySelectorAll(".card").forEach(c=>c.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  if(id==="wait") startCountdown();
+}
+
+/* COUNTDOWN */
+function startCountdown(){
+  let time=15;
+  const c=document.getElementById("countdown");
+  const h=document.getElementById("heart");
+  clearInterval(timer);
+  h.classList.add("hidden");
+  c.textContent=time;
+
+  timer=setInterval(()=>{
+    time--;
+    c.textContent=time;
+    if(time<=3 && time>0) h.classList.remove("hidden");
+    else h.classList.add("hidden");
+    if(time<=0){
+      clearInterval(timer);
+      showPage("start");
+    }
+  },1000);
+}
+
+/* NO BUTTON (GIFS + TEXT) */
 const noBtn=document.getElementById("noBtn");
 const textEl=document.getElementById("startNoText");
 const gifEl=document.getElementById("startGif");
-const music=document.getElementById("bgMusic");
-
-/* 🎵 MUSIC CONTROL */
-function playMusic(){
-  music.volume=0.6;
-  music.play().catch(()=>{});
-}
-function stopMusic(){
-  music.pause();
-}
-
-/* NO OPTIONS (15 GIFs) */
 const noOptions=[
  {t:"Oh… that hurts a little 🥺",g:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjB3NjR1N3EyNGdtZWZxaDZ3dm1sM2FsOXpnYXJrZmZlaGI4cjhlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUybVfQ4/giphy.gif"},
  {t:"That makes me sad 😔",g:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzNnM2RiNnc3MGtxYjlldTl4a2N1MWoxejEzeDNnNDRmdjI1YmY1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTY1kHmcLsCsg/giphy.gif"},
@@ -228,21 +240,14 @@ const noOptions=[
  {t:"Trying to stay calm 😔",g:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyeGhpYjl3cjJ3bjNmZzRuZXl2NWFkYTJqbWV1dTF2Mmg3ZHM4eGp1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P6ONpz0bAieoE/giphy.gif"},
  {t:"Okay… I hear you 😔",g:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyd2ViN3NtN3RwcXdyM2dka2YwMmt3ems2bDZ6c3EyNnRxcDZwb2g0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ToMjGpFVxYb2xdX3rCE/giphy.gif"}
 ];
-
 let noCount=0;
 function noClicked(){
   const o=noOptions[noCount%noOptions.length];
   textEl.innerText=o.t;
   gifEl.src=o.g;
-  noBtn.classList.remove("pulse","shrink");
-  void noBtn.offsetWidth;
-  noBtn.classList.add(noCount%2===0?"pulse":"shrink");
   noCount++;
 }
-function showPage(id){
-  document.querySelectorAll(".card").forEach(c=>c.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-}
 </script>
+
 </body>
 </html>
