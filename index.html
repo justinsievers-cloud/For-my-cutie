@@ -30,7 +30,6 @@ body {
   padding: 20px;
 }
 
-/* 🌸 CARD BACKGROUND */
 .card {
   position: relative;
   background: linear-gradient(
@@ -86,7 +85,7 @@ button {
 }
 
 .yes { background: #ff4d6d; color: white; }
-.no { background: #f1f1f1; color: #ff4d6d; }
+.no  { background: #f1f1f1; color: #ff4d6d; }
 .secondary { background: #eaeaea; color: #333; }
 .disabled { opacity: 0.5; cursor: not-allowed; }
 </style>
@@ -98,10 +97,11 @@ button {
 
 <!-- START -->
 <div class="card slide" id="start">
-  <h1>Lana, will you be my Valentine on February 14th? 💕</h1>
+  <h1>Ma Belle Princessé, will you be my Valentine on February 14th? 💕</h1>
 
+  <!-- 🌸 UPDATED START GIF -->
   <img id="startGif" class="main-gif"
-       src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
+       src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYjd0YnNyMGM0empweXhqZHBtZWN0djAxbG4wNXlwaWt6dm80eTNqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o35sLcXzrteR4mrzLw/giphy.gif">
 
   <button class="yes" onclick="showPage('letters')">Yes 💖</button>
   <button class="no" id="startNo" onclick="startNoClicked()">No 😐</button>
@@ -186,23 +186,18 @@ button {
 <script>
 const fallbackGif = "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif";
 
-/* 😔 ONLY SAD GIFS (15) */
+/* 😔 15 SAD GIFs */
 const startNoOptions = [
-  { text:"Oh… that hurts a little 🥺", gif:"https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" },
-  { text:"That makes me sad 😔", gif:"https://media.giphy.com/media/l0HlQ7LRalY8Yv5x6/giphy.gif" },
-  { text:"My heart dropped 💔", gif:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
-  { text:"Ouch… okay 😞", gif:"https://media.giphy.com/media/26ufcVAp3AiJJsrIs/giphy.gif" },
-  { text:"That wasn’t what I hoped for 🥺", gif:"https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" },
-  { text:"This makes me quiet 😔", gif:"https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
-  { text:"I need a moment 💔", gif:"https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif" },
-  { text:"That stings 😞", gif:"https://media.giphy.com/media/l3vR4CdLInXOhr3rO/giphy.gif" },
-  { text:"I didn’t expect that 🥺", gif:"https://media.giphy.com/media/3o7btNRptqBgLSKR2w/giphy.gif" },
-  { text:"My smile faded 😔", gif:"https://media.giphy.com/media/3o6ZsU1mYb0K6xHk3K/giphy.gif" },
-  { text:"That’s a soft no 💔", gif:"https://media.giphy.com/media/3o6Zt2G1n2rQwq6zKM/giphy.gif" },
-  { text:"I’ll pretend I’m okay 😞", gif:"https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" },
-  { text:"That hurt more than I thought 🥺", gif:"https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" },
-  { text:"I could use a hug 💔", gif:"https://media.giphy.com/media/3o6ZsY8ZJpYpH1nJ4k/giphy.gif" },
-  { text:"Okay… I hear you 😔", gif:"https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" }
+  { text:"Oh… that hurts a little 🥺", gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjB3NjR1N3EyNGdtZWZxaDZ3dm1sM2FsOXpnYXJrZmZlaGI4cjhlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUybVfQ4/giphy.gif" },
+  { text:"That makes me sad 😔", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzNnM2RiNnc3MGtxYjlldTl4a2N1MWoxejEzeDNnNDRmdjI1YmY1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTY1kHmcLsCsg/giphy.gif" },
+  { text:"My heart dropped 💔", gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyb2pmdWlhZmlpMWF6c3Z2bWh1bW91ajFzNGJ3dzhhYWtwOXc1dWNlZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ty9Sg8oHghPWg/giphy.gif" },
+  { text:"Hmm… that stings 😞", gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyMnlrMDRmbmNudXc4NDE3NXdxcjdmampqaWxnY213emd3dTRwbmN2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P53TSsopKicrm/giphy.gif" },
+  { text:"I didn’t expect that 🥺", gif:"https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYnE4MXQyazc5cnNxM3Aya3c0d3dqbzVjcmF1eHNkeWp5YWt0cnUxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OBNZCbTy1s8u8i7Wre/giphy.gif" },
+  { text:"That made me quiet 😔", gif:"https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZGR2cDI1cGVlaWtybDlqOWN0ZzNsYmg3Y2ZieHJqMWExNnJ2Z2VtZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oXB0K4oFw3fck/giphy.gif" },
+  { text:"Are you sure? 💔", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZmpncGV4NnhqMnAxdWxvdWk5eHI1NXhsc3B5cno2ZjBoZ2Q3czA0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6gDSyjaOPwZ4A/giphy.gif" },
+  { text:"That really got me 😔", gif:"https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydzg3NGZnaXh3MXUyMGRtaDB1NmkwNWVydHdqYzdtcTdmYnNraXl5NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12WhkSmwGOGIUM/giphy.gif" },
+  { text:"My smile faded 😞", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyamdxM20ybW43a29jNml0dDVoZzE2dmMwcmZwNTZzNWhrbG5lazVoZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fm0FiSOfefH5m/giphy.gif" },
+  { text:"Okay… I hear you 😔", gif:"https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyd2ViN3NtN3RwcXdyM2dka2YwMmt3ems2bDZ6c3EyNnRxcDZwb2g0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ToMjGpFVxYb2xdX3rCE/giphy.gif" }
 ];
 
 let startNoCount = 0;
