@@ -32,17 +32,19 @@ body {
 
 .card {
   position: relative;
-  background: rgba(255,255,255,0.9);
-  padding: 32px 26px 34px;
-  border-radius: 26px;
+  background: rgba(255,255,255,0.92);
+  padding: 34px 26px;
+  border-radius: 28px;
   width: 100%;
   max-width: 440px;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+  box-shadow: 0 25px 55px rgba(0,0,0,0.25);
   color: #2b2b2b;
   text-align: center;
+  overflow: hidden;
 }
 
-/* ✨ page animation */
+.hidden { display: none; }
+
 .slide {
   animation: slideIn 0.35s ease;
 }
@@ -53,8 +55,7 @@ body {
 
 h1 {
   font-size: 1.85em;
-  margin-bottom: 16px;
-  font-weight: 600;
+  margin-bottom: 14px;
 }
 
 p {
@@ -63,8 +64,8 @@ p {
 }
 
 img {
-  width: 220px;
-  margin: 16px auto 10px;
+  width: 230px;
+  margin: 14px auto;
   border-radius: 18px;
   display: block;
 }
@@ -79,28 +80,21 @@ button {
   cursor: pointer;
 }
 
-.yes {
-  background: #ff4d6d;
-  color: white;
-}
+.yes { background: #ff4d6d; color: white; }
+.no  { background: #f1f1f1; color: #ff4d6d; }
+.secondary { background: #eaeaea; color: #333; }
+.disabled { opacity: 0.5; cursor: not-allowed; }
 
-.no {
-  background: #f1f1f1;
-  color: #ff4d6d;
+/* 🌸 floating flowers & hearts */
+.decor {
+  position: absolute;
+  font-size: 26px;
+  opacity: 0.8;
+  animation: float 10s linear infinite;
 }
-
-.secondary {
-  background: #eaeaea;
-  color: #333;
-}
-
-.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.hidden {
-  display: none;
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to   { transform: translateY(-120vh); }
 }
 </style>
 </head>
@@ -115,42 +109,49 @@ button {
 
   <img id="startGif"
        src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
-       alt="cute gif">
+       onerror="this.src=fallbackGif">
 
-  <button class="yes" onclick="showPage('letters')">Yes 💖</button>
+  <button class="yes" onclick="showPage('flowers')">Yes 💖</button>
   <button class="no" id="startNo" onclick="startNoClicked()">No 😐</button>
 
   <p id="startNoText"></p>
 </div>
 
+<!-- FLOWERS PAGE -->
+<div class="card hidden" id="flowers">
+  <h1>🌹🌸🤍</h1>
+  <p>You’re surrounded by flowers… just for you 💕</p>
+  <button class="yes" onclick="showPage('letters')">Continue 💖</button>
+</div>
+
 <!-- LETTERS -->
 <div class="card hidden" id="letters">
-  <h1>💌 Letters for You</h1>
+  <h1>💌 Letters for You 💋🌹</h1>
   <button class="yes" onclick="showPage('letter1')">📩 Letter 1</button>
   <button class="yes" onclick="showPage('letter2')">📩 Letter 2</button>
 </div>
 
 <!-- LETTER 1 -->
 <div class="card hidden" id="letter1">
-  <h1>For my future wifey 💍</h1>
+  <h1>For my future wifey 💍🙈</h1>
   <p>
     Depuis que tu fais partie de ma vie,  
-    tout semble un peu plus doux.  
+    tout semble un peu plus doux. 🌸  
     <br><br>
     Ton sourire m’apaise,  
     ta présence me rassure,  
-    et le temps passé avec toi me fait simplement du bien.  
+    et le temps passé avec toi me fait simplement du bien 💋  
     <br><br>
     Sans pression, sans attente —  
-    seulement avec beaucoup de respect,  
-    de tendresse et de sincérité 🤍
+    juste beaucoup de respect,  
+    de tendresse et d’amour 🤍🌹
   </p>
   <button class="secondary" onclick="showPage('letters')">Back</button>
 </div>
 
 <!-- LETTER 2 -->
 <div class="card hidden" id="letter2">
-  <h1>An idea 💡</h1>
+  <h1>An idea 💡💖</h1>
   <button class="yes" onclick="showPage('idea1')">
     A gentle idea — simple, no pressure, only if it feels right to you 🤍
   </button>
@@ -159,54 +160,49 @@ button {
 
 <!-- IDEA 1 -->
 <div class="card hidden" id="idea1">
-  <h1>Just us 🤍</h1>
+  <h1>Just us 🤍💋</h1>
   <p>
-    What do you think about a Netflix movie night together on Discord?  
+    Netflix movie night together on Discord? 🎬🌹  
     <br><br>
-    We can watch a movie of your choice…  
-    or simply talk and enjoy the time together.
+    A movie of your choice…  
+    or just talking and enjoying the time 💖
   </p>
   <button class="yes" onclick="showPage('success')">Yes 💖</button>
   <button class="no" onclick="showPage('ideaNo')">No 😐</button>
   <button class="secondary" onclick="showPage('idea2')">Another idea 💡</button>
-  <button class="secondary" onclick="showPage('letter2')">Back</button>
 </div>
 
 <!-- IDEA NO -->
 <div class="card hidden" id="ideaNo">
-  <img src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" alt="sad gif">
+  <img src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">
   <p><strong>Okay 🤍</strong><br>Please share your decision with the admin.</p>
 
   <button class="yes" onclick="showPage('idea1')">
-    Would you like to gently go back and look at it again? 🤍
+    Would you like to gently go back and look again? 🤍
   </button>
 
   <button class="disabled">Or we do nothing at all</button>
-  <p style="font-size:0.9em;">
-    Unfortunately, the resources for this option have been exhausted 😝😏
-  </p>
+  <p>Unfortunately, resources are exhausted 😝😏</p>
 </div>
 
 <!-- IDEA 2 -->
 <div class="card hidden" id="idea2">
-  <h1>Another thought 🤍</h1>
+  <h1>Another thought 🤍🌹</h1>
   <p>
-    I could come to you…  
+    I could come to you… 💋  
     <br><br>
-    only if you feel comfortable and it’s not too much.  
-    <br><br>
-    I respect every decision you make 💋  
-    I never want to do anything that makes you uncomfortable.
+    only if you feel comfortable.  
+    I respect every decision you make 🤍
   </p>
   <button class="secondary" onclick="showPage('idea1')">Back</button>
 </div>
 
-<!-- SUCCESS PAGE -->
+<!-- SUCCESS -->
 <div class="card hidden" id="success">
-  <h1>🎉 Congratulations 🎉</h1>
+  <h1>🎉 Congratulations 💖🌹</h1>
   <p>
     You have successfully completed  
-    the selection process.  
+    the selection process 💋  
     <br><br>
     Please share your decision  
     with the <strong>Master Admin</strong> 😌
@@ -216,29 +212,43 @@ button {
 </div>
 
 <script>
-let startNoCount = 0;
-const startNoTexts = [
-  "Are you sure? 😌",
-  "That felt a little suspicious 🤨",
-  "I think that button is lying 😅",
-  "Hmm… interesting choice 😏",
-  "Let’s try that again 🤍"
+const fallbackGif = "https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif";
+
+const startNoOptions = [
+  { text: "Wait… what? 😳", gif: "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif" },
+  { text: "That felt suspicious 🤨", gif: "https://media.giphy.com/media/3orieZg0iN3GkZyF1S/giphy.gif" },
+  { text: "I think that button lied 😅", gif: "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif" },
+  { text: "Hmm… interesting 😏", gif: "https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif" },
+  { text: "Try again maybe? 🤍", gif: "https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" },
+  { text: "That kinda hurt 🥺", gif: "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" },
+  { text: "Are you really sure? 😌", gif: "https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif" },
+  { text: "I’ll pretend I didn’t see that 😅", gif: "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" },
+  { text: "My heart says YES 💖", gif: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" },
+  { text: "That button is broken 😝", gif: "https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" },
+  { text: "Nice try 😏", gif: "https://media.giphy.com/media/3o6ZtpWvwnhf34Oj0A/giphy.gif" },
+  { text: "Hmm… again 😌", gif: "https://media.giphy.com/media/l0HlQ7LRalY8Yv5x6/giphy.gif" },
+  { text: "That’s illegal 😤", gif: "https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" },
+  { text: "Be honest 🙈", gif: "https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" },
+  { text: "One more time 💕", gif: "https://media.giphy.com/media/3o6Zt8MgUuvSbkZYWc/giphy.gif" }
 ];
 
+let startNoCount = 0;
+
 function startNoClicked() {
+  const opt = startNoOptions[startNoCount % startNoOptions.length];
+  document.getElementById("startNoText").innerText = opt.text;
+  const gif = document.getElementById("startGif");
+  gif.src = opt.gif;
+  gif.onerror = () => gif.src = fallbackGif;
+
   const btn = document.getElementById("startNo");
-  const text = document.getElementById("startNoText");
-
-  text.innerText = startNoTexts[startNoCount % startNoTexts.length];
-  startNoCount++;
-
   const card = document.getElementById("start");
-  const maxX = card.clientWidth - btn.offsetWidth - 20;
-  const maxY = 120;
 
   btn.style.position = "absolute";
-  btn.style.left = Math.random() * maxX + "px";
-  btn.style.top = Math.random() * maxY + "px";
+  btn.style.left = Math.random() * (card.clientWidth - btn.offsetWidth - 20) + "px";
+  btn.style.top  = Math.random() * 120 + "px";
+
+  startNoCount++;
 }
 
 function showPage(id) {
